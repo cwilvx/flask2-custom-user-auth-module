@@ -17,5 +17,13 @@ class Users(Mongo):
     def generate_hash(password):
         return sha256.hash(password)
 
+    @staticmethod
+    def verify_hash(password, hashed_password):
+        return sha256.verify(password, hashed_password)
+
     def register_user(self, user_details):
         self.db.insert_one(user_details)
+
+    def get_user_by_username(self, username):
+        user = self.db.find_one({"username": username})
+        return user

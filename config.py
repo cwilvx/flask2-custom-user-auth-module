@@ -12,6 +12,7 @@ class TestConfig(Config):
 class DevConfig(Config):
     DEBUG = True
     ENV = 'development'
+    SECRET = "a"
 
 
 class ProdConfig(Config):

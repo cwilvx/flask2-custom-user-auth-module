@@ -21,3 +21,4 @@ def create_app(config_name):
 
 
 api.add_resource(auth.views.Index, '/')
+api.add_resource(auth.views.RegisterUser, '/new')

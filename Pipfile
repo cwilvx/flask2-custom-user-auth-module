@@ -9,6 +9,7 @@ flask-restful = "*"
 pymongo = "*"
 flask-jwt = "*"
 flask-jwt-extended = "*"
+passlib = "*"
 
 [dev-packages]
 

@@ -5,7 +5,9 @@ from bson import json_util
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import (
     create_access_token,
-    create_refresh_token
+    create_refresh_token,
+    get_jwt_identity,
+    jwt_required
 )
 
 from app.models import Users
@@ -74,3 +76,13 @@ class LoginUser(Resource):
             }, 200
         else:
             return {'msg': 'wrong username or password'}
+
+
+class RefreshToken(Resource):
+    @jwt_required(refresh=True)
+    def post(self):
+        user = get_jwt_identity()
+        access_token = create_refresh_token(identity=user)
+        return {'access_token': access_token}, 200
+
+

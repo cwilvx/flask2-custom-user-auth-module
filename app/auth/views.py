@@ -86,3 +86,8 @@ class RefreshToken(Resource):
         return {'access_token': access_token}, 200
 
 
+class GetCurrentUser(Resource):
+    @jwt_required()
+    def get(self):
+        user = get_jwt_identity()
+        return user

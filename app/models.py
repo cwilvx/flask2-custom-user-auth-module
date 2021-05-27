@@ -1,4 +1,5 @@
 import pymongo
+from bson import ObjectId
 from passlib.hash import pbkdf2_sha256 as sha256
 
 
@@ -27,3 +28,8 @@ class Users(Mongo):
     def get_user_by_username(self, username):
         user = self.db.find_one({"username": username})
         return user
+
+    def get_all_users(self):
+        users = self.db.find()
+        return users
+

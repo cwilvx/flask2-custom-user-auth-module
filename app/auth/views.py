@@ -2,6 +2,7 @@ import datetime
 import json
 
 from bson import json_util
+from flask import request
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import (
     create_access_token,
@@ -70,10 +71,10 @@ class LoginUser(Resource):
             refresh_token = create_refresh_token(user)
 
             return {
-                'msg': 'logged in as {}'.format(username),
-                'access_token': access_token,
-                'refresh_token': refresh_token
-            }, 200
+                       'msg': 'logged in as {}'.format(username),
+                       'access_token': access_token,
+                       'refresh_token': refresh_token
+                   }, 200
         else:
             return {'msg': 'wrong username or password'}
 
@@ -91,3 +92,19 @@ class GetCurrentUser(Resource):
     def get(self):
         user = get_jwt_identity()
         return user
+
+
+class GetAllUsers(Resource):
+    def get(self):
+        all_users = []
+
+        users = user_instance.get_all_users()
+
+        for user in users:
+            user_obj = json.dumps(user, default=json_util.default)
+            user_item = json.loads(user_obj)
+            all_users.append(user_item)
+
+        return all_users
+
+

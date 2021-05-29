@@ -109,8 +109,8 @@ class GetAllUsers(Resource):
 
 
 class GetUserById(Resource):
-    def get(self):
-        user_id = request.args.get("user_id")
+    def get(self, user_id):
+        # user_id = request.args.get("user_id")
         print(user_id)
         user = user_instance.get_user_by_id(user_id)
         print(user)

@@ -108,3 +108,12 @@ class GetAllUsers(Resource):
         return all_users
 
 
+class GetUserById(Resource):
+    def get(self, user_id):
+        # user_id = request.args.get("user_id")
+        user = user_instance.get_user_by_id(user_id)
+        print(user)
+        user_obj = json.dumps(user, default=json_util.default)
+        user_item = json.loads(user_obj)
+
+        return user_item

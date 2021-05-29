@@ -36,3 +36,5 @@ class Users(Mongo):
     def get_user_by_id(self, user_id):
         user = self.db.find_one({'_id': ObjectId(user_id)})
         self.db.find_one(user)
+
+        return user

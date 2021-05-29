@@ -1,3 +1,4 @@
+import bson
 import pymongo
 from bson import ObjectId
 from passlib.hash import pbkdf2_sha256 as sha256
@@ -34,7 +35,9 @@ class Users(Mongo):
         return users
 
     def get_user_by_id(self, user_id):
-        user = self.db.find_one({'_id': ObjectId(user_id)})
-        self.db.find_one(user)
+        try:
+            user = self.db.find_one({'_id': ObjectId(user_id)})
+        except bson.errors.InvalidId:
+            user = {'message': 'Invalid Id'}
 
         return user

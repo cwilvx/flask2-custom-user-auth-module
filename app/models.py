@@ -1,7 +1,7 @@
 import bson
 import pymongo
 from bson import ObjectId
-from passlib.hash import pbkdf2_sha256 as sha256
+from passlib.hash import bcrypt_sha256 as sha256
 
 
 class Mongo:
